@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(require("./routes/index.routes.js"));
 
-app.use(require("./userModel.js"));
+//app.use(require("./models/userModel.js"));
 
 
 // Puerto del Servicio Web
