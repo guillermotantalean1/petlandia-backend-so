@@ -6,11 +6,11 @@ services:
     restart: always
     build: .
     ports:
-      - "6000:3000"
+      - "4000:3000"
     links: 
       - database
   database:
     container_name: contenedor_db_petlandia
     image: mongo
     ports:
-      - "27019:27017"
+      - "27020:27017"

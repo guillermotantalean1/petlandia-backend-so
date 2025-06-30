@@ -9,7 +9,7 @@ mongoose.connect("mongodb://database/database_petlandia")
 */
 
 //ENV DEV
-mongoose.connect("mongodb://localhost:27018/database_petlandia")
+mongoose.connect("mongodb://database:27017/database_petlandia")
     .then(db=>console.log("DB is connected to ", db.connection.host))
     .catch(err => console.error(err));
 
