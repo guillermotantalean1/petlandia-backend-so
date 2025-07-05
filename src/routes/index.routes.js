@@ -14,56 +14,56 @@ router.get("/", (req, res) => {
 });
 
 
-// ------------------ USUARIOS ------------------
+// ------------------ userS ------------------
 
-// Crear usuario
-router.post("/usuarios", async (req, res) => {
+// Crear user
+router.post("/users", async (req, res) => {
     try {
-        const nuevoUsuario = await ModelUser.create(req.body);
-        res.status(201).json(nuevoUsuario);
+        const nuevouser = await ModelUser.create(req.body);
+        res.status(201).json(nuevouser);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 });
 
-// Listar todos los usuarios
-router.get("/usuarios", async (req, res) => {
+// Listar todos los users
+router.get("/users", async (req, res) => {
     try {
-        const usuarios = await ModelUser.find({});
-        res.json(usuarios);
+        const users = await ModelUser.find({});
+        res.json(users);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-// Obtener un usuario por ID
-router.get("/usuarios/:id", async (req, res) => {
+// Obtener un user por ID
+router.get("/users/:id", async (req, res) => {
     try {
-        const usuario = await ModelUser.findById(req.params.id);
-        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
-        res.json(usuario);
+        const user = await ModelUser.findById(req.params.id);
+        if (!user) return res.status(404).json({ error: "user no encontrado" });
+        res.json(user);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-// Actualizar un usuario
-router.put("/usuarios/:id", async (req, res) => {
+// Actualizar un user
+router.put("/users/:id", async (req, res) => {
     try {
-        const usuario = await ModelUser.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
-        res.json(usuario);
+        const user = await ModelUser.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!user) return res.status(404).json({ error: "user no encontrado" });
+        res.json(user);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 });
 
-// Eliminar un usuario (opcional)
-router.delete("/usuarios/:id", async (req, res) => {
+// Eliminar un user (opcional)
+router.delete("/users/:id", async (req, res) => {
     try {
-        const usuario = await ModelUser.findByIdAndDelete(req.params.id);
-        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
-        res.json({ mensaje: "Usuario eliminado correctamente" });
+        const user = await ModelUser.findByIdAndDelete(req.params.id);
+        if (!user) return res.status(404).json({ error: "user no encontrado" });
+        res.json({ mensaje: "user eliminado correctamente" });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -176,13 +176,13 @@ router.post("/ordenes", async (req, res) => {
 
 // Listar órdenes
 router.get("/ordenes", async (req, res) => {
-    const ordenes = await OrderModel.find({}).populate("usuario_id productos.producto_id");
+    const ordenes = await OrderModel.find({}).populate("user_id products.product_id");
     res.json(ordenes);
 });
 
 // Obtener orden por ID
 router.get("/ordenes/:id", async (req, res) => {
-    const orden = await OrderModel.findById(req.params.id).populate("usuario_id productos.producto_id");
+    const orden = await OrderModel.findById(req.params.id).populate("user_id products.product_id");
     if (!orden) return res.status(404).json({ error: "Orden no encontrada" });
     res.json(orden);
 });
@@ -212,13 +212,13 @@ router.post("/donaciones", async (req, res) => {
 
 // Listar donaciones
 router.get("/donaciones", async (req, res) => {
-    const donaciones = await DonationModel.find({}).populate("usuario_id asociacion_id order_id");
+    const donaciones = await DonationModel.find({}).populate("user_id association_id order_id");
     res.json(donaciones);
 });
 
 // Obtener donación por ID
 router.get("/donaciones/:id", async (req, res) => {
-    const donacion = await DonationModel.findById(req.params.id).populate("usuario_id asociacion_id order_id");
+    const donacion = await DonationModel.findById(req.params.id).populate("user_id association_id order_id");
     if (!donacion) return res.status(404).json({ error: "Donación no encontrada" });
     res.json(donacion);
 });
